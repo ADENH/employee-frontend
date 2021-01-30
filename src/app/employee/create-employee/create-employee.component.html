@@ -1,0 +1,89 @@
+<h3>Add data Karyawan</h3>
+<div [hidden]="submitted" style="width: 100%;">
+  <form [formGroup]="employeeData" (ngSubmit)="onSubmit()">
+      <div class=" row">
+        <div class="col-xs-12 col-col-xs-12 col-md-5 col-lg-4">
+          <label for="name">Nama</label>
+        </div>
+        <div class="col-xs-12 col-12 col-md-3 " [formGroup]="employeeData">
+          <input type="text" class="form-control" id="nama" formControlName="nama" [(ngModel)]="employee.nama" name="nama">
+        </div>
+      </div>
+      <br />
+
+      <div class="row">
+        <div class="col-xs-12 col-col-xs-12 col-md-5 col-lg-4">
+      <label for="tanggalLahir">Tanggal lahir</label>
+        </div>
+        <div class="col-xs-12 col-md-5 col-lg-4 " [formGroup]="employeeData">
+          <input
+            formControlName="tanggalLahir"
+            class="form-control"
+            #datepickerMDY="bsDatepicker"
+            bsDatepicker
+            [bsConfig]="{ dateInputFormat: 'MM/DD/YYYY' }">
+        </div>
+        <div class="col-xs-12 col-12 col-md-3 ">
+          <button class="btn btn-success" (click)="datepickerMDY.toggle()" [attr.aria-expanded]="datepickerMDY.isOpen" type="button">
+            <i class="bi bi-calendar-date"></i>
+          </button>
+        </div>
+      </div>
+      <br />
+    
+      <div class="row">
+        <div class="col-xs-12 col-col-xs-12 col-md-5 col-lg-4">
+          <div>Jabatan</div>
+        </div>
+        <div class="col-xs-12 col-col-xs-12 col-md-5 col-lg-4">
+          <select class="form-control" name="jabatan" id="jabatan" formControlName="jabatan">
+          <ng-container  *ngFor="let position of apiResponse.content">
+            <option [value]="position.code" [selected]="jabatan ==1">{{position.name}}</option>
+          </ng-container>
+        </select>
+        </div>
+    </div>
+    
+
+    <br/>
+      <div class=" row">
+        <div class="col-xs-12 col-col-xs-12 col-md-5 col-lg-4">
+        <label for="name">NIP</label>
+        </div>
+        <div class="col-xs-12 col-col-xs-12 col-md-5 col-lg-4" [formGroup]="employeeData">
+        <input formControlName="nip" type="number" class="form-control" id="nip" [(ngModel)]="employee.nip" name="nip">
+        </div>
+      </div>
+      <br />
+
+      <div class=" row">
+        <div class="col-xs-12 col-col-xs-12 col-md-5 col-lg-4">
+        <label for="name">Jenis Kelamin</label>
+        </div>
+        <div class="col-xs-12 col-col-xs-12 col-md-5 col-lg-4" [formGroup]="employeeData">
+          <div>
+            <input id="Pria" type="radio" value="Pria" name="gender" formControlName="jenisKelamin" (change)="changeGender($event)">
+            <label for="Pria">Pria</label>
+         </div>
+ 
+         <div>
+            <input id="Wanita" type="radio" value="Wanita" name="gender" formControlName="jenisKelamin" (change)="changeGender($event)">
+            <label for="Wanita">Wanita</label>
+         </div>
+    
+        </div>
+      </div>
+      <br />
+        
+      <div class="row">
+        <div class="col-xs-12 col-col-xs-12 col-md-5 col-lg-4">
+          <div></div>
+        </div>
+        <div class="col-xs-12 col-col-xs-12 col-md-5 col-lg-4">
+        <button class="btn btn-success">Submit</button>
+        </div>
+      </div>
+      <br />
+  </form>
+</div>
+
